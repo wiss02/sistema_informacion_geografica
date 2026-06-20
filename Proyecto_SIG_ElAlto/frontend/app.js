@@ -56,10 +56,11 @@ const mapaClaro = L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voy
     maxZoom: 20
 });
 
-// Capa de mapa satelital (Esri World Imagery)
-const mapaSatelite = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
-    attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community',
-    maxZoom: 19
+// Capa de mapa satelital híbrido (Satélite + Calles y Avenidas)
+const mapaSatelite = L.tileLayer('https://{s}.google.com/vt/lyrs=y&x={x}&y={y}&z={z}', {
+    maxZoom: 20,
+    subdomains: ['mt0', 'mt1', 'mt2', 'mt3'],
+    attribution: '&copy; Google Maps'
 });
 
 // Agregar el mapa claro por defecto
