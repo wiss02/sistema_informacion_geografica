@@ -30,7 +30,7 @@ body, html {
 }
 
 /* ============================================================
-   PANEL LATERAL — Estilo original conservado
+   PANEL LATERAL
    ============================================================ */
 #panel-lateral {
     width: 320px;
@@ -46,7 +46,6 @@ body, html {
     overflow-x: hidden;
 }
 
-/* Scrollbar sutil */
 #panel-lateral::-webkit-scrollbar { width: 4px; }
 #panel-lateral::-webkit-scrollbar-track { background: transparent; }
 #panel-lateral::-webkit-scrollbar-thumb {
@@ -55,7 +54,32 @@ body, html {
 }
 
 /* ============================================================
-   LOGO / ENCABEZADO — igual al original
+   RESPONSIVE DESIGN (NUEVO PARA CELULARES)
+   ============================================================ */
+@media (max-width: 768px) {
+    #contenedor {
+        flex-direction: column;
+        overflow-y: auto;
+    }
+    #panel-lateral {
+        width: 100%;
+        min-width: 100%;
+        height: auto;
+        border-right: none;
+        border-bottom: 2px solid #3b82f6;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+    }
+    #map-wrapper {
+        min-height: 60vh; /* El mapa tomará al menos el 60% de la pantalla */
+        width: 100%;
+    }
+    body, html {
+        overflow: auto; /* Permitir scroll en celulares */
+    }
+}
+
+/* ============================================================
+   LOGO / ENCABEZADO
    ============================================================ */
 .logo-carrera-container {
     display: flex;
@@ -79,11 +103,10 @@ body, html {
     transform: scale(1.05);
 }
 
-/* Ocultar el bloque de título nuevo (usamos header-panel como antes) */
 .titulo-logo { display: none; }
 
 /* ============================================================
-   ENCABEZADO DEL PANEL — igual al original
+   ENCABEZADO DEL PANEL
    ============================================================ */
 .header-panel {
     text-align: center;
@@ -109,7 +132,7 @@ body, html {
 }
 
 /* ============================================================
-   TARJETAS DE ESTADÍSTICAS (NUEVO)
+   TARJETAS DE ESTADÍSTICAS
    ============================================================ */
 .stats-grid {
     display: grid;
@@ -172,10 +195,10 @@ body, html {
 /* ============================================================
    SECCIÓN TÍTULOS
    ============================================================ */
-.seccion-titulo { display: none; } /* no se usa en este diseño */
+.seccion-titulo { display: none; }
 
 /* ============================================================
-   GRUPOS DE CONTROL Y SELECTS — igual al original
+   GRUPOS DE CONTROL Y SELECTS
    ============================================================ */
 .control-group {
     margin-bottom: 22px;
@@ -228,7 +251,7 @@ body, html {
 }
 
 /* ============================================================
-   ESTADO DE CONEXIÓN (NUEVO)
+   ESTADO DE CONEXIÓN
    ============================================================ */
 #estado-conexion {
     margin-bottom: 16px;
@@ -275,7 +298,7 @@ body, html {
 }
 
 /* ============================================================
-   LEYENDA — igual al original + nuevos items
+   LEYENDA
    ============================================================ */
 .leyenda {
     margin-top: auto;
@@ -348,7 +371,7 @@ body, html {
 }
 
 /* ============================================================
-   MAPA
+   MAPA Y CONTROLES DEL SATÉLITE
    ============================================================ */
 #map-wrapper {
     flex: 1;
@@ -359,6 +382,24 @@ body, html {
 #map {
     width: 100%;
     height: 100%;
+}
+
+.leaflet-control-layers {
+    border-radius: 8px !important;
+    border: 1px solid rgba(59,130,246,0.3) !important;
+    background: rgba(15,23,42,0.95) !important;
+    color: #f1f5f9 !important;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.3) !important;
+    font-family: 'Inter', sans-serif !important;
+}
+
+.leaflet-control-layers-list {
+    padding: 8px;
+}
+
+.leaflet-control-layers-base label {
+    margin-bottom: 5px;
+    cursor: pointer;
 }
 
 /* ============================================================
@@ -400,7 +441,7 @@ body, html {
 @keyframes spin { to { transform: rotate(360deg); } }
 
 /* ============================================================
-   POPUPS DE LEAFLET (PERSONALIZADOS)
+   POPUPS DE LEAFLET
    ============================================================ */
 .leaflet-popup-content-wrapper {
     background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%) !important;
@@ -496,7 +537,7 @@ body, html {
 }
 
 /* ============================================================
-   CONTROLES DEL MAPA
+   CONTROLES DEL MAPA ZOOM
    ============================================================ */
 .leaflet-control-zoom {
     border: 1px solid rgba(59,130,246,0.2) !important;
@@ -519,12 +560,3 @@ body, html {
     background: rgba(59,130,246,0.2) !important;
     color: #f1f5f9 !important;
 }
-
-.leaflet-control-attribution {
-    background: rgba(15,23,42,0.75) !important;
-    color: #475569 !important;
-    font-size: 10px !important;
-    border-radius: 4px 0 0 0 !important;
-}
-
-.leaflet-control-attribution a { color: #3b82f6 !important; }

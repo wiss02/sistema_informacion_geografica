@@ -1,15 +1,7 @@
 // ============================================================
-// 1. DETECCIÓN DINÁMICA DE LA URL BASE DE LA API
+// 1. CONFIGURACIÓN DE LA API
 // ============================================================
-const getApiBaseUrl = () => {
-    if (window.location.protocol === 'file:') return 'http://127.0.0.1:8000';
-    if (window.location.port && !['80','443','8000'].includes(window.location.port)) {
-        return `${window.location.protocol}//${window.location.hostname}:8000`;
-    }
-    return '';
-};
-
-const API_BASE = getApiBaseUrl();
+const API_BASE = "http://138.197.115.242";
 
 // ============================================================
 // 2. ÍCONOS PERSONALIZADOS SVG POR TIPO
@@ -48,21 +40,37 @@ function crearIcono(tipo) {
 }
 
 // ============================================================
-// 3. INICIALIZAR MAPA — MAPA OSCURO ESTILO DARK
+// 3. INICIALIZAR MAPA Y AGREGAR MODO SATÉLITE
 // ============================================================
 const map = L.map('map', {
     center: [-16.4914, -68.1931],
     zoom: 13,
     zoomControl: true,
     attributionControl: true,
-}).setView([-16.4914, -68.1931], 13);
+});
 
 // Capa de mapa claro y moderno (CartoDB Voyager)
-L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
-    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OSM</a> &copy; <a href="https://carto.com/attributions">CARTO</a>',
+const mapaClaro = L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OSM</a>',
     subdomains: 'abcd',
     maxZoom: 20
-}).addTo(map);
+});
+
+// Capa de mapa satelital (Esri World Imagery)
+const mapaSatelite = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+    attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community',
+    maxZoom: 19
+});
+
+// Agregar el mapa claro por defecto
+mapaClaro.addTo(map);
+
+// Crear el control para cambiar entre vistas
+const baseMaps = {
+    "Mapa Estándar": mapaClaro,
+    "Modo Satélite": mapaSatelite
+};
+L.control.layers(baseMaps).addTo(map);
 
 // Grupo de marcadores
 let capaMarcadores = L.layerGroup().addTo(map);
