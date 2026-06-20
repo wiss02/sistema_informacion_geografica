@@ -1,0 +1,34 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:15
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password_seguro_123 # ¡Cambia esto por algo más seguro!
+      POSTGRES_DB: sig_educacion
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      # Este volumen carga tu archivo .sql y lo ejecuta automáticamente al crear la DB por primera vez
+      - ./sig_educacion.sql:/docker-entrypoint-initdb.d/init.sql
+
+  web:
+    build: ./Proyecto_SIG_ElAlto
+    restart: always
+    ports:
+      # Mapea el puerto 80 del servidor VPS al 8000 del contenedor web
+      - "80:8000"
+    environment:
+      API_HOST: 0.0.0.0
+      API_PORT: 8000
+      DB_HOST: db
+      DB_PORT: 5432
+      DB_NAME: sig_educacion
+      DB_USER: postgres
+      DB_PASSWORD: password_seguro_123 # Debe ser igual al de arriba
+    depends_on:
+      - db
+
+volumes:
+  postgres_data:

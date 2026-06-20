@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plataforma SIG – Infraestructura Educativa El Alto</title>
+    <meta name="description" content="Sistema de Información Geográfica de la infraestructura educativa del municipio de El Alto, Bolivia. UPEA - Ingeniería de Sistemas.">
+
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+          integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div id="contenedor">
+
+    <!-- ===== PANEL LATERAL ===== -->
+    <div id="panel-lateral">
+
+        <!-- Logo centrado (como antes) -->
+        <div class="logo-carrera-container">
+            <img src="OIP.webp" alt="Logo Ingeniería de Sistemas UPEA" class="logo-sistemas">
+        </div>
+
+        <!-- Título (como antes) -->
+        <div class="header-panel">
+            <h2>SIG EDUCACIÓN</h2>
+            <p>UPEA - Ingeniería de Sistemas</p>
+        </div>
+
+        <!-- Estadísticas (NUEVO) -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-icon">🏫</div>
+                <div class="stat-info">
+                    <span class="stat-number" id="num-total">—</span>
+                    <span class="stat-label">Total</span>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">📚</div>
+                <div class="stat-info">
+                    <span class="stat-number" id="num-unidades">—</span>
+                    <span class="stat-label">Unidades Ed.</span>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">🎓</div>
+                <div class="stat-info">
+                    <span class="stat-number" id="num-institutos">—</span>
+                    <span class="stat-label">Institutos</span>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">📍</div>
+                <div class="stat-info">
+                    <span class="stat-number" id="num-distritos">—</span>
+                    <span class="stat-label">Distritos</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <!-- Filtro tipo -->
+        <div class="control-group">
+            <label for="select-tipo">
+                <span class="label-icon">⬛</span> Tipo de Institución:
+            </label>
+            <div class="select-personalizado">
+                <select id="select-tipo" onchange="cargarDatos()">
+                    <option value="">Todas las instituciones</option>
+                    <option value="Unidad Educativa">Unidades Educativas</option>
+                    <option value="Instituto Superior">Institutos Superiores</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Filtro distrito -->
+        <div class="control-group">
+            <label for="select-distrito">
+                <span class="label-icon">🗺️</span> Distrito Municipal:
+            </label>
+            <div class="select-personalizado">
+                <select id="select-distrito" onchange="cargarDatos()">
+                    <option value="">Todos los Distritos (1 al 14)</option>
+                    <option value="1">Distrito 1</option>
+                    <option value="2">Distrito 2</option>
+                    <option value="3">Distrito 3</option>
+                    <option value="4">Distrito 4</option>
+                    <option value="5">Distrito 5</option>
+                    <option value="6">Distrito 6</option>
+                    <option value="7">Distrito 7</option>
+                    <option value="8">Distrito 8</option>
+                    <option value="9">Distrito 9</option>
+                    <option value="10">Distrito 10</option>
+                    <option value="11">Distrito 11</option>
+                    <option value="12">Distrito 12</option>
+                    <option value="13">Distrito 13</option>
+                    <option value="14">Distrito 14</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Estado de conexión (NUEVO) -->
+        <div id="estado-conexion" class="estado-cargando">
+            <span class="estado-dot"></span>
+            <span id="estado-texto">Cargando datos...</span>
+        </div>
+
+        <!-- Leyenda (como antes + nuevos ítems) -->
+        <div class="leyenda">
+            <h3>Análisis de Cobertura</h3>
+            <div class="item-leyenda">
+                <div class="icono-leyenda universidad"></div>
+                <p>Instituto / Universidad</p>
+            </div>
+            <div class="item-leyenda">
+                <div class="icono-leyenda colegio"></div>
+                <p>Unidad Educativa</p>
+            </div>
+            <div class="item-leyenda">
+                <span class="circulo-color"></span>
+                <p>Radio de Cobertura (500m)</p>
+            </div>
+        </div>
+
+        <div class="panel-footer">UPEA · Ingeniería de Sistemas · 2025</div>
+
+    </div>
+
+    <!-- ===== MAPA ===== -->
+    <div id="map-wrapper">
+        <div id="map"></div>
+        <div id="loading-overlay">
+            <div class="spinner"></div>
+            <p>Cargando mapa...</p>
+        </div>
+    </div>
+
+</div>
+
+<!-- Leaflet JS -->
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+
+<script src="app.js"></script>
+</body>
+</html>
