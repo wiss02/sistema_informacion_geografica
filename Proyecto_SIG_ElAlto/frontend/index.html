@@ -114,6 +114,23 @@
             <span id="estado-texto">Cargando datos...</span>
         </div>
 
+        <!-- Sección de Administración (NUEVO) -->
+        <div class="divider"></div>
+        <div class="seccion-admin-container">
+            <button id="btn-login-trigger" class="btn-sidebar">
+                <span class="btn-icon">🔒</span> Iniciar Sesión Admin
+            </button>
+            
+            <div id="controles-admin" class="oculto">
+                <button id="btn-registrar-trigger" class="btn-sidebar btn-admin-accent">
+                    <span class="btn-icon">➕</span> Registrar Institución
+                </button>
+                <button id="btn-logout" class="btn-sidebar btn-danger">
+                    <span class="btn-icon">🔓</span> Cerrar Sesión
+                </button>
+            </div>
+        </div>
+
         <!-- Leyenda (como antes + nuevos ítems) -->
         <div class="leyenda">
             <h3>Análisis de Cobertura</h3>
@@ -135,6 +152,14 @@
 
     </div>
 
+    <!-- Botón flotante de menú para celulares (NUEVO) -->
+    <button id="btn-toggle-menu" class="btn-menu-movil">
+        <span>☰</span>
+    </button>
+
+    <!-- Overlay oscuro para cerrar el menú en móviles (NUEVO) -->
+    <div id="mobile-overlay" class="overlay-movil"></div>
+
     <!-- ===== MAPA ===== -->
     <div id="map-wrapper">
         <div id="map"></div>
@@ -142,8 +167,98 @@
             <div class="spinner"></div>
             <p>Cargando mapa...</p>
         </div>
+        
+        <!-- Banner flotante de registro activo (NUEVO) -->
+        <div id="banner-registro" class="banner-aviso oculto">
+            <span class="banner-icon">📍</span>
+            <span class="banner-texto">Modo Registro Activo: Haz clic en el mapa para ubicar la institución</span>
+            <button id="btn-cancelar-modo-registro" class="btn-banner-cancelar">Cancelar</button>
+        </div>
     </div>
 
+</div>
+
+<!-- Modal Login (NUEVO) -->
+<div id="modal-login" class="modal oculto">
+    <div class="modal-contenido">
+        <span class="btn-cerrar-modal" id="btn-cerrar-login">&times;</span>
+        <div class="modal-header">
+            <h3>Iniciar Sesión</h3>
+            <p>Acceso restringido para personal autorizado.</p>
+        </div>
+        <div class="form-group">
+            <label for="input-password">Contraseña de Administrador:</label>
+            <input type="password" id="input-password" placeholder="Ingrese su contraseña">
+        </div>
+        <p id="login-error" class="mensaje-error oculto"></p>
+        <div class="modal-botones">
+            <button id="btn-submit-login" class="btn-primary">Ingresar</button>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Registro (NUEVO) -->
+<div id="modal-registro" class="modal oculto">
+    <div class="modal-contenido">
+        <span class="btn-cerrar-modal" id="btn-cerrar-registro">&times;</span>
+        <div class="modal-header">
+            <h3>Registrar Institución</h3>
+            <p>Complete los datos para agregar una nueva infraestructura educativa.</p>
+        </div>
+        <div class="form-group">
+            <label for="reg-nombre">Nombre de la Institución:</label>
+            <input type="text" id="reg-nombre" placeholder="Ej. Unidad Educativa Los Andes">
+        </div>
+        <div class="form-group">
+            <label for="reg-tipo">Tipo de Institución:</label>
+            <div class="select-personalizado">
+                <select id="reg-tipo">
+                    <option value="Unidad Educativa">Unidad Educativa</option>
+                    <option value="Instituto Superior">Instituto Superior</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="reg-distrito">Distrito Municipal:</label>
+            <div class="select-personalizado">
+                <select id="reg-distrito">
+                    <option value="1">Distrito 1</option>
+                    <option value="2">Distrito 2</option>
+                    <option value="3">Distrito 3</option>
+                    <option value="4">Distrito 4</option>
+                    <option value="5">Distrito 5</option>
+                    <option value="6">Distrito 6</option>
+                    <option value="7">Distrito 7</option>
+                    <option value="8">Distrito 8</option>
+                    <option value="9">Distrito 9</option>
+                    <option value="10">Distrito 10</option>
+                    <option value="11">Distrito 11</option>
+                    <option value="12">Distrito 12</option>
+                    <option value="13">Distrito 13</option>
+                    <option value="14">Distrito 14</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="reg-oferta">Oferta Académica / Turnos:</label>
+            <textarea id="reg-oferta" placeholder="Ej. Carreras técnicas, niveles inicial/primaria, etc."></textarea>
+        </div>
+        <div class="form-row">
+            <div class="form-group half">
+                <label for="reg-latitud">Latitud:</label>
+                <input type="text" id="reg-latitud" readonly>
+            </div>
+            <div class="form-group half">
+                <label for="reg-longitud">Longitud:</label>
+                <input type="text" id="reg-longitud" readonly>
+            </div>
+        </div>
+        <p id="registro-error" class="mensaje-error oculto"></p>
+        <div class="modal-botones">
+            <button id="btn-cancelar-registro" class="btn-secondary">Cancelar</button>
+            <button id="btn-guardar-registro" class="btn-primary">Guardar</button>
+        </div>
+    </div>
 </div>
 
 <!-- Leaflet JS -->
