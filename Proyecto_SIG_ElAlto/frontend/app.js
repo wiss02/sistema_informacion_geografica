@@ -69,7 +69,7 @@ const baseMaps = {
 };
 L.control.layers(baseMaps).addTo(map);
 
-let capaMarcadores = L.layerGroup().addTo(map);
+let capaMarcadores = L.featureGroup().addTo(map);
 
 // ============================================================
 // 4. ACTUALIZAR ESTADÍSTICAS EN EL PANEL
